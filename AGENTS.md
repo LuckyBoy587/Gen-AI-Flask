@@ -723,3 +723,315 @@ pip install groq python-dotenv
 ```
 
 - For notebook submissions, use separate cells for setup, helper function, workflow steps, and outputs so the notebook stays clean and easy to review [file:1].
+
+## Flask Questions Requiring `app.py`
+
+For questions based on Flask web applications, create an `app.py` file as the main entry point when the problem involves routes, forms, templates, request handling, APIs, or running a local web server. This keeps the project structure standard and makes the solution easy to run and review [file:1].
+
+### Rule for Flask Questions
+
+- If the question asks for a Flask web app, create an `app.py` file.
+- Put the Flask app initialization, routes, and main run block inside `app.py`.
+- If HTML pages are required, place them in a `templates/` folder.
+- If CSS, JavaScript, or images are required, place them in a `static/` folder.
+- Keep the code modular and simple.
+- Use meaningful route names.
+- Print nothing unrelated inside the Flask app unless the question explicitly asks for logs or console output.
+- If the assignment is notebook-based but the question is clearly a Flask app task, include code cells that generate the required `app.py` content cleanly rather than forcing the whole solution into random cells [file:1].
+
+### Standard `app.py` Structure
+
+Use this pattern for most Flask questions:
+
+```python
+from flask import Flask, render_template, request, jsonify
+
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return "Hello, Flask!"
+
+if __name__ == '__main__':
+    app.run(debug=True)
+```
+
+### When to Use Templates
+
+Use `render_template()` when:
+- The question asks for a web page or UI.
+- User input is collected using forms.
+- Output must be shown in a browser page.
+- The app has multiple pages.
+
+Example:
+
+```python
+from flask import Flask, render_template, request
+
+app = Flask(__name__)
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+if __name__ == '__main__':
+    app.run(debug=True)
+```
+
+### When to Use Request Handling
+
+Use `request` when:
+- The question asks to accept form input.
+- The app processes GET or POST data.
+- User-submitted values must be read and displayed.
+
+Example:
+
+```python
+from flask import Flask, render_template, request
+
+app = Flask(__name__)
+
+@app.route('/', methods=['GET', 'POST'])
+def index():
+    result = None
+    if request.method == 'POST':
+        name = request.form.get('name')
+        result = f"Hello, {name}"
+    return render_template('index.html', result=result)
+
+if __name__ == '__main__':
+    app.run(debug=True)
+```
+
+### When to Use JSON APIs
+
+Use `jsonify()` when:
+- The question asks to build an API using Flask.
+- The output should be JSON instead of HTML.
+- The route is meant for programmatic access.
+
+Example:
+
+```python
+from flask import Flask, jsonify
+
+app = Flask(__name__)
+
+@app.route('/api/message')
+def message():
+    return jsonify({
+        'status': 'success',
+        'message': 'Flask API is working'
+    })
+
+if __name__ == '__main__':
+    app.run(debug=True)
+```
+
+### Suggested Project Structure
+
+For Flask-based assignments, use this structure when needed:
+
+```text
+project_folder/
+│
+├── app.py
+├── templates/
+│   └── index.html
+└── static/
+    ├── style.css
+    └── script.js
+```
+
+### How to Decide the Output Style
+
+- If the question is only about routes or APIs, `app.py` may be enough.
+- If the question asks for a webpage, include `templates/index.html`.
+- If styling is required, include files inside `static/`.
+- If database integration is asked, keep database code inside `app.py` unless the question allows a larger project structure.
+- If the task is small, avoid overengineering; this is Flask, not Avengers Endgame architecture.
+
+### Common Pattern for Form-Based Flask Questions
+
+```python
+from flask import Flask, render_template, request
+
+app = Flask(__name__)
+
+@app.route('/', methods=['GET', 'POST'])
+def index():
+    output = None
+    if request.method == 'POST':
+        text = request.form.get('text')
+        output = text.upper()
+    return render_template('index.html', output=output)
+
+if __name__ == '__main__':
+    app.run(debug=True)
+```
+
+### Common Pattern for Calculator-Type Flask Questions
+
+```python
+from flask import Flask, render_template, request
+
+app = Flask(__name__)
+
+@app.route('/', methods=['GET', 'POST'])
+def calculator():
+    result = None
+    if request.method == 'POST':
+        num1 = float(request.form.get('num1'))
+        num2 = float(request.form.get('num2'))
+        result = num1 + num2
+    return render_template('index.html', result=result)
+
+if __name__ == '__main__':
+    app.run(debug=True)
+```
+
+### Common Pattern for API-Type Flask Questions
+
+```python
+from flask import Flask, request, jsonify
+
+app = Flask(__name__)
+
+@app.route('/api/process', methods=['POST'])
+def process():
+    data = request.get_json()
+    text = data.get('text', '')
+    return jsonify({
+        'original_text': text,
+        'length': len(text),
+        'uppercase_text': text.upper()
+    })
+
+if __name__ == '__main__':
+    app.run(debug=True)
+```
+
+### Notes for Flask Assignments
+
+- Install Flask if needed:
+
+```bash
+pip install flask
+```
+
+- Run the app using:
+
+```bash
+python app.py
+```
+
+- Default local URL is usually:
+
+```text
+http://127.0.0.1:5000/
+```
+
+- Use `debug=True` for student assignments unless the question says otherwise.
+- Keep route logic readable and compact.
+- Do not mix unrelated experimental code into `app.py`.
+- If the question asks for multiple pages, define separate routes and matching template files.
+
+### What to Do for Similar Questions
+
+- First identify whether the task is a web page app, form app, or API app.
+- Create `app.py` as the main Flask file.
+- Add required routes.
+- Add templates or static files only if the question needs them.
+- Keep file naming standard and submission-friendly.
+- Make the solution easy to run directly with `python app.py`.
+
+### Directory Rule for Flask Questions
+
+Since there may be many Flask questions, create a new directory for each Flask-based question inside `ACTIVE_DAY_FOLDER` instead of placing all Flask files directly in one location. This keeps each project isolated, avoids filename clashes, and makes submission cleaner [file:1].
+
+### Flask Project Folder Policy
+
+- For every new Flask question, create a separate project directory inside `ACTIVE_DAY_FOLDER`.
+- The directory name must be based on the question topic.
+- Use a short, meaningful, lowercase name.
+- Replace spaces with underscores.
+- Remove special characters.
+- If the same folder name already exists, append a counter such as `_2`, `_3`, and so on.
+- Place `app.py` and all related files inside that directory.
+- Do not mix files from different Flask questions in the same folder [file:1].
+
+### Folder Naming Examples
+
+- `Day7/flask_login_system/`
+- `Day7/student_form_app/`
+- `Day7/text_analyzer_api/`
+- `Day7/result_management_system/`
+- `Day7/flask_crud_app/`
+
+If a name already exists:
+
+- `Day7/flask_login_system_2/`
+- `Day7/student_form_app_2/`
+
+### Standard Flask Project Structure
+
+Use this structure for each Flask question:
+
+```text
+ACTIVE_DAY_FOLDER/
+└── project_name/
+    ├── app.py
+    ├── templates/
+    │   └── index.html
+    └── static/
+        ├── style.css
+        └── script.js
+```
+
+### Minimum Rule
+
+- If the question only needs backend routes or an API, the folder may contain only `app.py`.
+- If the question needs HTML pages, add a `templates/` folder.
+- If the question needs CSS or JavaScript, add a `static/` folder.
+- Create only the files actually required by the question.
+
+### Creation Workflow for Flask Questions
+
+1. Read `ACTIVE_DAY_FOLDER`.
+2. Check whether that folder exists.
+3. Create a new subdirectory with an appropriate topic-based name.
+4. If the same subdirectory name already exists, append a counter.
+5. Create `app.py` inside that folder.
+6. Add `templates/` and `static/` only if required by the problem.
+7. Return the final project path clearly.
+
+### Example Paths
+
+- `Day7/student_feedback_app/app.py`
+- `Day7/library_management_flask/app.py`
+- `Day7/text_summarizer_api/app.py`
+
+### Naming Rule
+
+Choose folder names from the core task of the question, not vague names like:
+
+- `flask_project`
+- `new_app`
+- `question1`
+- `program`
+
+Prefer names like:
+
+- `attendance_tracker`
+- `employee_form_portal`
+- `weather_api_dashboard`
+- `resume_screening_app`
+
+### Why This Rule Helps
+
+- Prevents file conflicts between multiple Flask assignments.
+- Keeps each question submission self-contained.
+- Makes templates and static assets easier to manage.
+- Makes the project easier to open, review, zip, and submit later.
