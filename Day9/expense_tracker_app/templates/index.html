@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aura Spend - AI Expense Tracker</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="tracker-container">
+        <!-- Header -->
+        <header class="tracker-header">
+            <div class="logo">
+                <i class="fa-solid fa-receipt"></i>
+                <h1>Aura Spend</h1>
+            </div>
+            <p class="subtitle">AI-Powered Natural Language Expense Tracker</p>
+        </header>
+
+        <!-- Stats Overview -->
+        <section class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon spending"><i class="fa-solid fa-wallet"></i></div>
+                <div class="stat-info">
+                    <span class="stat-label">Total Spending</span>
+                    <span class="stat-value" id="total-amount">$0.00</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon items"><i class="fa-solid fa-cart-shopping"></i></div>
+                <div class="stat-info">
+                    <span class="stat-label">Total Transactions</span>
+                    <span class="stat-value" id="total-items">0</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Form and List Grid -->
+        <div class="main-grid">
+            <!-- Add Expense Panel -->
+            <div class="panel card">
+                <h2>Add Expense</h2>
+                <p class="panel-desc">Type your transaction naturally. Our AI will automatically parse the amount and category.</p>
+                <form id="expense-form">
+                    <div class="input-group">
+                        <textarea id="expense-text" placeholder="e.g. Spent 500 on groceries today, or got lunch for 45.50" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn" id="submit-btn">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i> Process with AI
+                    </button>
+                </form>
+            </div>
+
+            <!-- Expense List Panel -->
+            <div class="panel list-panel card">
+                <h2>Transactions History</h2>
+                <div class="expense-list-container" id="expense-list-container">
+                    <div class="empty-state" id="empty-state">
+                        <i class="fa-solid fa-file-invoice-dollar"></i>
+                        <p>No expenses added yet</p>
+                    </div>
+                    <ul class="expense-list" id="expense-list">
+                        <!-- Populated by JS -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

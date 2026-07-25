@@ -1,0 +1,303 @@
+:root {
+    --bg-main: #090D16;
+    --card-bg: rgba(255, 255, 255, 0.03);
+    --border-color: rgba(255, 255, 255, 0.07);
+    --text-primary: #F3F4F6;
+    --text-secondary: #9CA3AF;
+    --accent-primary: #10B981; /* Emerald green for money/spending theme */
+    --accent-purple: #8B5CF6;
+    --glass-hover: rgba(255, 255, 255, 0.06);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    min-height: 100vh;
+    padding: 2rem 1rem;
+    background: radial-gradient(circle at 10% 20%, rgba(16, 185, 129, 0.1) 0%, rgba(9, 13, 22, 0) 40%),
+                radial-gradient(circle at 90% 80%, rgba(139, 92, 246, 0.1) 0%, rgba(9, 13, 22, 0) 40%);
+}
+
+.tracker-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* Header */
+.tracker-header {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+}
+
+.logo i {
+    font-size: 2.2rem;
+    color: var(--accent-primary);
+    text-shadow: 0 0 15px rgba(16, 185, 129, 0.4);
+}
+
+.logo h1 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    background: linear-gradient(to right, #FFF, #D1FAE5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+    color: var(--text-secondary);
+    font-size: 1rem;
+}
+
+/* Stats Overview */
+.stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.stat-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    padding: 1.5rem;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    backdrop-filter: blur(12px);
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+    border-color: rgba(16, 185, 129, 0.3);
+    transform: translateY(-2px);
+}
+
+.stat-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+}
+
+.stat-icon.spending {
+    background-color: rgba(16, 185, 129, 0.15);
+    color: var(--accent-primary);
+}
+
+.stat-icon.items {
+    background-color: rgba(139, 92, 246, 0.15);
+    color: var(--accent-purple);
+}
+
+.stat-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-label {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.25rem;
+}
+
+.stat-value {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+/* Main Layout Grid */
+.main-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1.8fr;
+    gap: 1.5rem;
+}
+
+@media (max-width: 768px) {
+    .main-grid {
+        grid-template-columns: 1fr;
+    }
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 2rem;
+    backdrop-filter: blur(12px);
+}
+
+.panel h2 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.panel-desc {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+    line-height: 1.4;
+}
+
+/* Forms styling */
+.input-group {
+    margin-bottom: 1.25rem;
+}
+
+.input-group textarea {
+    width: 100%;
+    height: 120px;
+    background-color: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1rem;
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    resize: none;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.input-group textarea:focus {
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 12px rgba(16, 185, 129, 0.15);
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 0.9rem;
+    background-color: var(--text-primary);
+    color: var(--bg-main);
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: all 0.2s ease;
+}
+
+.submit-btn:hover {
+    background-color: var(--accent-primary);
+    color: white;
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+    transform: translateY(-1px);
+}
+
+/* Expenses List */
+.list-panel {
+    display: flex;
+    flex-direction: column;
+}
+
+.expense-list-container {
+    flex-grow: 1;
+    min-height: 250px;
+    margin-top: 1rem;
+}
+
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 220px;
+    color: var(--text-secondary);
+    gap: 1rem;
+}
+
+.empty-state i {
+    font-size: 3rem;
+    opacity: 0.3;
+}
+
+.expense-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.expense-item {
+    background-color: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-color);
+    padding: 1rem 1.25rem;
+    border-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    animation: slideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.expense-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.expense-category {
+    display: inline-block;
+    align-self: flex-start;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    background-color: rgba(139, 92, 246, 0.15);
+    color: #A78BFA;
+    padding: 0.2rem 0.5rem;
+    border-radius: 6px;
+    letter-spacing: 0.5px;
+}
+
+.expense-text-desc {
+    font-size: 0.95rem;
+    color: var(--text-primary);
+}
+
+.expense-amount {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--accent-primary);
+}
+
+/* Slide in animation */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
